@@ -1,0 +1,142 @@
+html {
+    overflow: auto;
+}
+body {
+    background-color: white;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 15px;
+    overflow: auto;
+}
+
+a {
+    cursor: pointer;
+    color: #3B5998;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    padding-bottom: 5px;
+    line-height: 135%;
+}
+
+br {
+    padding: 40px 0;
+}
+
+input {
+    text-align: right;
+    margin: 0 2px 8px 0;
+}
+
+h2 {
+    font-style: italic;
+}
+
+.clear { clear: both; }
+.right { float: right; }
+.left { float: left; }
+.center { margin: 0 auto; text-align: center; }
+.noborder { border: 0px none white !important; }
+.clearfix { display: block; }
+
+/************************************************************************/
+
+#wrapper {
+    margin: 0px auto;
+    width: 920px;
+    height: auto !important; /* browsers em condicoes */
+    height: 100%; /* IE6: o mesmo que min-height */
+    min-height: 100%; /* browsers em condicoes */
+    z-index: 1;
+    position: relative;
+    padding: 10px;
+}
+
+
+.options-table {
+    width: 100%;
+    text-align: left;
+    vertical-align: top;
+    border-collapse: collapse; 
+    margin-bottom: 50px; 
+    background-color: #F7F7F7;
+}
+
+.options-table tr {
+    padding-bottom: 10px;
+    vertical-align: top;
+}
+
+.options-table tr th {
+    font-size: 14px;
+    width: 200px;
+    min-width: 200px;
+    padding: 10px;
+    text-align: left;
+}
+
+.options-table tr td {
+    font-size: 12px;
+    width: auto;
+    padding: 10px;
+}
+
+.options-table tr td .option-explanation {
+    color: #7B7B91;
+    font-size: 11px;
+}
+
+.options-table ul {
+    list-style-type: square;
+    list-style-position: inside;
+    color: #7B7B91;
+    font-size: 11px;
+}
+
+.options-table a {
+    font-size: 11px;
+}
+
+.options-table li {
+    margin-bottom: 15px;
+}
+
+.calc-row {
+    text-align: right;
+    padding-top: 10px;
+    border-top: 1px solid #B9C4DA;
+}
+
+.calc-row .button {
+    border: 1px solid #999;
+    border-bottom-color: #999;
+    background-color: #DDD;
+    vertical-align: middle;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 4px 6px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 0 10px 0;
+    height: 20px;
+}
+
+.calc-row .button:hover {
+    color: gray;
+    text-decoration: none;
+}
+
+.resultado {
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 23px;
+    margin: 0 15px 0 0;
+    font-weight: bold;
+}

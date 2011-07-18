@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <title>Imposto Especial</title>
+            
+        <link type="text/css" rel="stylesheet" href="stylesheets/reset.css"/>
+        <link type="text/css" rel="stylesheet" href="stylesheets/main.css"/>
+        
+        <link rel="shortcut icon" href="/favicon.ico" />
+
+        
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-24619127-1']);
+            _gaq.push(['_trackPageview']);
+          
+            (function() {
+              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+          
+        </script>
+    </head>
+    <body onload="pageLoad()">
+        <div id="wrapper">
+            <h2>Calcular retenção na fonte de sobretaxa a efectuar:</h2>
+            <hr/>
+            <table id="table-calc-sobretaxa" class="options-table">
+                <tbody>
+                    <tr>
+                        <th>Salário Mensal Bruto</th>
+                        <td>
+                            <input id="input-salario" name="input-salario" type="text" value="1300"/> <b>€</b>
+                            <div class="option-explanation">
+                                Rendimentos de trabalho dependente (Categoria A). No caso dos trabalhadores que têm algum tipo
+                                de vínculo laboral com o Estado e que sofreram já um corte salarial, o valor do Salário Bruto a
+                                considerar deverá o salário após corte salarial. 
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Retenção na Fonte de IRS</th>
+                        <td>
+                            <input id="input-perc-retencao-na-fonte" name="input-perc-retencao-na-fonte" type="text" value="12"/> <b>%</b>
+                            <div class="option-explanation">
+                                Taxa de retenção na fonte de IRS. Este valor está dependente da sua remuneração, número de dependentes (filhos)
+                                estado matrimonial, entre outros. Caso tenha dúvidas no seu preenchimento, verifique
+                                <a href="http://info.portaldasfinancas.gov.pt/NR/rdonlyres/DB5B6AF4-0701-4DBC-941D-C2B0480DEB72/0/Tabelas_continente%202011.xls" target="_blank">nesta</a>
+                                tabela o caso em que se aplica e o respectivo valor.
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Taxa Social Única</th>
+                        <td>
+                            <input id="input-taxa-social-unica" name="input-taxa-social-unica" type="text" disabled="disabled" value="11"/> <b>%</b>
+                            <div class="option-explanation">
+                                Medida contributiva para a Segurança Social prevista no Orçamento de Estado Português e aplicada a trabalhadores e empresas.
+                                No ano de 2011 este valor é de 11% sobre o trabalhador.
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Salário Mínimo Nacional</th>
+                        <td>
+                            <input id="input-salario-minimo" name="input-salario-minimo" type="text" disabled="disabled" value="485"/> <b>€</b>
+                        </td>
+                    </tr>
+                    <tr class="calc-row">
+                        <th/>
+                        <td>
+                            <span id="resultado-sobretaxa" class="resultado">
+                               0.00 €
+                            </span>
+                            <a class="button" onclick="calcularSobretaxa()">Calcular Sobretaxa</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Apuramento da sobretaxa devido a final:</h2>
+            <hr/>
+            <table id="table-calc-sobretaxa-devido" class="options-table">
+                <tbody>
+                    <tr>
+                        <th>
+                        </th>
+                        <td>
+                            <div class="option-explanation">
+                                "Tal como o Público <a href="http://economia.publico.pt/Noticia/familias-com-baixos-rendimentos-vao-emprestar-ao-estado_1503254" target="_blank">destaca</a> deverá
+                                haver ajustamentos aquando da entrega da declaração anual de IRS já em 2012, podendo haver situação de devolução do imposto especial pago e outras
+                                em que este terá sido sub-estimado."
+                                <br/><br/>
+                                <i>O cálculo do pagamento/reembolso pode ser efectuado mas esta opção carece de um conhecimento mais aprofundado antes de ser implementada.</i>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Notas:</h2>
+            <hr/>
+            <table id="table-notas" class="options-table">
+                <tbody>
+                    <tr>
+                        <th>
+                            Informações:
+                        </th>
+                        <td>
+                            <ul>
+                                <li>
+                                    <b>
+                                        Esta página foi implementada com o intuito de ser mais uma fonte de informação sobre este imposto que,
+                                        nas últimas semanas, tem suscitado tantas dúvidas. O valor calculado carece de confirmação oficial. Esta página
+                                        em momento algum esteve/está filiada ao Governo Português.
+                                    </b>
+                                </li>
+                                <li>
+                                    A fórmula usada para o cálculo da sobretaxa é uma cópia fiel
+                                    da disponível <a href="http://economiafinancas.com/2011/07/formula-de-calculo-para-apuramento-do-imposto-especial-retencao-mensal/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+EconomiaFinancas+%28Economia+%26+Finan%C3%A7as%29" target="_blank">neste artigo</a>.
+                                </li>
+                                <li>
+                                    Neste momento, e até prova em contrário, a dita fórmula apenas funciona para trabalhadores da Categoria A. Veja
+                                    <a href="http://www.jornaldenegocios.pt/archivos/2011_07/simulacoesdoimposto.pdf" target="_blank">aqui</a> algumas simulações para diferentes cenários.
+                                </li>
+                                <li>
+                                    Dependendo do tempo disponível, a minha vontade é alargar este cálculo para cenários com mais variáveis e que, de momento,
+                                    não são comtemplados por esta avaliação mais simples. Para isso, e para além do factor tempo, serão também precisos alguns esclarecimentos
+                                    nos cálculos já que o meu conhecimento nesta área é limitado.
+                                </li>
+                                <li>
+                                    Pode ver outros artigos relaccionados com o cálculo do imposto especial:
+                                    <a href="http://economia.publico.pt/Noticia/familias-com-baixos-rendimentos-vao-emprestar-ao-estado_1503254" target="_blank">aqui</a>, 
+                                    <a href="http://economiafinancas.com/2011/06/qual-vai-ser-o-corte-no-meu-subsidio-de-natal-devido-ao-imposto-especial/" target="_blank">aqui</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Contactos:
+                        </th>
+                        <td>
+                            <a href="mailto:impostoespecial.appspot@gmail.com">impostoespecial.appspot@gmail.com</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        
+        <script src="scripts/jquery-1.6.2.min.js" type="text/javascript"></script> 
+        <script src="scripts/main.js" type="text/javascript"></script> 
+    </body>
+</html>
