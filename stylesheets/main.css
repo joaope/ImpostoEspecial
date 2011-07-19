@@ -28,6 +28,10 @@ br {
 
 input {
     text-align: right;
+}
+
+input,
+select {
     margin: 0 2px 8px 0;
 }
 
@@ -72,8 +76,8 @@ h2 {
 
 .options-table tr th {
     font-size: 14px;
-    width: 200px;
-    min-width: 200px;
+    width: 220px;
+    min-width: 220px;
     padding: 10px;
     text-align: left;
 }
@@ -137,6 +141,12 @@ h2 {
     vertical-align: middle;
     display: inline-block;
     font-size: 23px;
-    margin: 0 15px 0 0;
     font-weight: bold;
+}
+
+.resultado-text {
+        vertical-align: middle;
+    display: inline-block;
+    font-size: 18px;
+    margin: 0 15px 0 0;
 }

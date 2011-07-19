@@ -35,23 +35,57 @@
                     <tr>
                         <th>Salário Mensal Bruto</th>
                         <td>
-                            <input id="input-salario" name="input-salario" type="text" value="1300"/> <b>€</b>
+                            <input id="input-salario" name="input-salario" type="text" value="1300" onkeyup="calcularRetencao()"/> <b>€</b>
                             <div class="option-explanation">
                                 Rendimentos de trabalho dependente (Categoria A). No caso dos trabalhadores que têm algum tipo
                                 de vínculo laboral com o Estado e que sofreram já um corte salarial, o valor do Salário Bruto a
-                                considerar deverá o salário após corte salarial. 
+                                considerar deverá ser o salário após corte salarial. 
                             </div>
                         </td>
                     </tr>
+                    
+                    <tr>
+                        <th>Situação</th>
+                        <td>
+                            <select id="input-situacao" onchange="calcularRetencao()">
+                                <option value="1">Trabalhador Dependente, Não Casado</option>
+                                <option value="2">Trabalhador Dependente, Casado, Único Titular</option>
+                                <option value="3" selected="selected">Trabalhador Dependente, Casado, Dois Titulares</option>
+                                <option value="4">Trabalhador Dependente, Não Casado, Deficiente</option>
+                                <option value="5">Trabalhador Dependente, Casado, Único Titular, Deficiente</option>
+                                <option value="6">Trabalhador Dependente, Casado, Dois Titulares, Deficiente</option>
+                            </select>
+                            <div class="option-explanation">
+                                Seleccione o cenário que corresponde à sua situação.
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <th>Número de Dependentes</th>
+                        <td>
+                            <select id="input-nr-filhos" onchange="calcularRetencao()">
+                                <option value="1">0</option>
+                                <option value="2">1</option>
+                                <option value="3">2</option>
+                                <option value="4">3</option>
+                                <option value="5">4</option>
+                                <option value="6">5 ou mais</option>
+                            </select>
+                            <div class="option-explanation">
+                                Seleccione o número de dependentes (filhos) que tem a seu cargo.
+                            </div>
+                        </td>
+                    </tr>
+                    
                     <tr>
                         <th>Retenção na Fonte de IRS</th>
                         <td>
-                            <input id="input-perc-retencao-na-fonte" name="input-perc-retencao-na-fonte" type="text" value="12"/> <b>%</b>
+                            <input id="input-perc-retencao-na-fonte" name="input-perc-retencao-na-fonte" type="text" value="(não calculado)" disabled="disabled"/> <b>%</b>
                             <div class="option-explanation">
-                                Taxa de retenção na fonte de IRS. Este valor está dependente da sua remuneração, número de dependentes (filhos)
-                                estado matrimonial, entre outros. Caso tenha dúvidas no seu preenchimento, verifique
-                                <a href="http://info.portaldasfinancas.gov.pt/NR/rdonlyres/DB5B6AF4-0701-4DBC-941D-C2B0480DEB72/0/Tabelas_continente%202011.xls" target="_blank">nesta</a>
-                                tabela o caso em que se aplica e o respectivo valor.
+                                Este valor é calculado automaticamente através das 3 variáveis anteriores: Salário Mensal Bruto,
+                                Situação e Número de Dependentes. A tabela usada para este cálculo está disponível
+                                <a href="http://info.portaldasfinancas.gov.pt/NR/rdonlyres/DB5B6AF4-0701-4DBC-941D-C2B0480DEB72/0/Tabelas_continente%202011.xls" target="_blank">neste link</a>.
                             </div>
                         </td>
                     </tr>
@@ -74,10 +108,12 @@
                     <tr class="calc-row">
                         <th/>
                         <td>
+                            <span class="resultado-text">
+                               Imposto Especial Retido:
+                            </span>
                             <span id="resultado-sobretaxa" class="resultado">
                                0.00 €
                             </span>
-                            <a class="button" onclick="calcularSobretaxa()">Calcular Sobretaxa</a>
                         </td>
                     </tr>
                 </tbody>
@@ -129,9 +165,9 @@
                                     <a href="http://www.jornaldenegocios.pt/archivos/2011_07/simulacoesdoimposto.pdf" target="_blank">aqui</a> algumas simulações para diferentes cenários.
                                 </li>
                                 <li>
-                                    Dependendo do tempo disponível, a minha vontade é alargar este cálculo para cenários com mais variáveis e que, de momento,
-                                    não são comtemplados por esta avaliação mais simples. Para isso, e para além do factor tempo, serão também precisos alguns esclarecimentos
-                                    nos cálculos já que o meu conhecimento nesta área é limitado.
+                                    Dependendo do tempo disponível, a minha vontade é alargar este cálculo a alguns cenários que, neste momento,
+                                    não são comtemplados por esta avaliação, nomeadamente aos pensionistas. Para isso, e para além do factor tempo,
+                                    serão também precisos alguns esclarecimentos nos cálculos já que o meu conhecimento nesta área é limitado.
                                 </li>
                                 <li>
                                     Pode ver outros artigos relaccionados com o cálculo do imposto especial:
@@ -154,6 +190,7 @@
 
         </div>
         
+        <script src="scripts/tabelas.js" type="text/javascript"></script>
         <script src="scripts/jquery-1.6.2.min.js" type="text/javascript"></script> 
         <script src="scripts/main.js" type="text/javascript"></script> 
     </body>
