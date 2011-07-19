@@ -1,44 +1,34 @@
 function calcularSobretaxa() {
-
+    
+    console.log("DDDwdwddww");
+    
     var salario = parseFloat($('#input-salario').val());
-    var perc_retencao = parseFloat($('#input-perc-retencao-na-fonte').val());
     var taxa_unica = parseFloat($('#input-taxa-social-unica').val());
     var salario_minimo = parseFloat($('#input-salario-minimo').val());
-
-    if (isNaN(salario) || salario < 0) {
-        resultadoImpostoEspecial('(erro no salario)');
-    }
-    else if (perc_retencao < 0 || perc_retencao > 100) {
-        resultadoImpostoEspecial('(erro na retenção na fonte)');
-    }
-    else {
-        perc_retencao /= 100;
-        taxa_unica /= 100;
-        
-        var result = (salario * (1 - perc_retencao - taxa_unica) - salario_minimo) * 0.5;
-        
-        resultadoImpostoEspecial(result);   
-    }
-}
-
-function calcularRetencao() {
-    var salario = parseFloat($('#input-salario').val());
-    var situacao = parseInt($('#input-situacao').val());
-    var nr_filhos = parseInt($('#input-nr-filhos').val())
-    var tabela_retencao = null;
-    var retencao = null;
     
     if (isNaN(salario) || salario < 0) {
-        resultadoRetencao('(salario invalido)');
+        resultadoImpostoEspecial('(erro no salario)');
+        return;
     }
-    else if (nr_filhos < 0 || nr_filhos > 6) {
-        resultadoRetencao('(número de filhos inválido)');
-    }
-    else if (situacao < 0 || situacao > 6) {
-        resultadoRetencao('(situação inválida)');
-    }
-    else {
-        switch(situacao) {
+    
+    console.log("DDDD");
+    
+    // TRABALHADOR DEPENDENTE
+    if ($('#radio-trab-dependente:checked').val())
+    {
+        // Enable/disable inputs
+        $('#input-trab-dependente-titular').removeAttr('disabled');
+        $('#input-trab-dependente-filhos').removeAttr('disabled');
+        $('#input-pensionista-categoria').attr('disabled', 'disabled');
+        $('#input-pensionista-titulares').attr('disabled', 'disabled');
+        
+        var titular = parseInt($('#input-trab-dependente-titular').val());
+        var nr_filhos = parseInt($('#input-trab-dependente-filhos').val())
+        var tabela_retencao = null;
+        var retencao = null;
+        
+        // Calcular retenção na fonte de IRS
+        switch(titular) {
             case 1:
                 tabela_retencao = tabela_trab_dependente_nao_casado;
                 break;
@@ -70,11 +60,66 @@ function calcularRetencao() {
         if (retencao == null && salario > tabela_retencao[tabela_retencao.length-1][0]) {
             retencao = tabela_retencao[tabela_retencao.length-1][nr_filhos];
         }
-        
+
         resultadoRetencao(retencao == null ? '(erro de calculo)' : retencao);
+        
+        // Calcular sobretaxa   
+        var perc_retencao = parseFloat($('#input-perc-retencao-na-fonte').val());
+        
+        perc_retencao /= 100;
+        taxa_unica /= 100;
+        
+        var result = (salario * (1 - perc_retencao - taxa_unica) - salario_minimo) * 0.5;
+        
+        // Imprimir resultado
+        resultadoImpostoEspecial(result); 
     }
-       
-    calcularSobretaxa();
+    // PENSIONISTA
+    else
+    {
+        // Enable/disable inputs
+        $('#input-trab-dependente-titular').attr('disabled', 'disabled');
+        $('#input-trab-dependente-filhos').attr('disabled', 'disabled');
+        $('#input-pensionista-categoria').removeAttr('disabled');
+        $('#input-pensionista-titulares').removeAttr('disabled');
+        
+        var categoria = parseInt($('#input-pensionista-categoria').val());
+        var titulares = parseInt($('#input-pensionista-titulares').val());
+        titulares = (titulares == 2 ? 2 : 1);
+        var retencao = null;
+        
+        switch(categoria) {
+            case 1:
+                tabela_retencao = tabela_pensionista_normal;
+                break;
+            case 2:
+                tabela_retencao = tabela_pensionista_deficiente;
+                break;
+            case 3:
+                tabela_retencao = tabela_pensionista_deficiente_forcas_armadas;
+                break;
+        }
+        
+        for (var i = 0; i < tabela_retencao.length - 1; i++) {
+            
+            if (salario <= tabela_retencao[i][0]) {
+                retencao = tabela_retencao[i][titulares];
+                break;
+            }
+        }
+        
+        if (retencao == null && salario > tabela_retencao[tabela_retencao.length-1][0]) {
+            retencao = tabela_retencao[tabela_retencao.length-1][titulares];
+        }
+
+        resultadoRetencao(retencao == null ? '(erro de calculo)' : retencao);
+        
+        // Calcular sobretaxa
+        var result = (salario - (salario * (retencao/100)) - salario_minimo) * 0.5;
+                      
+        // Imprimir resultado
+        resultadoImpostoEspecial(result); 
+    }
 }
 
 function resultadoRetencao(text) {
@@ -97,6 +142,6 @@ function resultadoImpostoEspecial(text) {
 }
 
 function pageLoad() {
-    calcularRetencao();
+    calcularSobretaxa();
 }
 

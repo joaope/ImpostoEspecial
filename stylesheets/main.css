@@ -69,12 +69,13 @@ h2 {
     background-color: #F7F7F7;
 }
 
-.options-table tr {
-    padding-bottom: 10px;
+.options-table .option-row {
+    padding-bottom: 20px;
     vertical-align: top;
+    border-bottom: 1px solid #B9C4DA;
 }
 
-.options-table tr th {
+.options-table .option-row th {
     font-size: 14px;
     width: 220px;
     min-width: 220px;
@@ -82,13 +83,13 @@ h2 {
     text-align: left;
 }
 
-.options-table tr td {
+.options-table .option-row td {
     font-size: 12px;
     width: auto;
     padding: 10px;
 }
 
-.options-table tr td .option-explanation {
+.options-table .option-row td .option-explanation {
     color: #7B7B91;
     font-size: 11px;
 }
@@ -145,8 +146,36 @@ h2 {
 }
 
 .resultado-text {
-        vertical-align: middle;
+    vertical-align: middle;
     display: inline-block;
     font-size: 18px;
     margin: 0 15px 0 0;
+}
+
+.sub-options-table {
+    width: auto;
+    text-align: left;
+    vertical-align: top;
+    border-collapse: collapse; 
+    margin: 0 0 0px 20px; 
+    background-color: #F7F7F7;
+}
+
+.sub-options-table .sub-options-row {
+    vertical-align: top;
+}
+
+.sub-options-table .sub-options-row th {
+    font-weight: normal;
+    font-size: 12px;
+    width: 160px;
+    min-width: 160px;
+    padding: 0px;
+    text-align: left;
+}
+
+.sub-options-table .sub-options-row td {
+    font-size: 12px;
+    width: auto;
+    padding: 10px;
 }

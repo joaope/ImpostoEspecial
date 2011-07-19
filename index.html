@@ -32,64 +32,112 @@
             <hr/>
             <table id="table-calc-sobretaxa" class="options-table">
                 <tbody>
-                    <tr>
-                        <th>Salário Mensal Bruto</th>
+                    <tr class="option-row">
+                        <th>Rendimento Mensal</th>
                         <td>
-                            <input id="input-salario" name="input-salario" type="text" value="1300" onkeyup="calcularRetencao()"/> <b>€</b>
+                            <input id="input-salario" name="input-salario" type="text" value="1300" onkeyup="calcularSobretaxa()"/> <b>€</b>
                             <div class="option-explanation">
-                                Rendimentos de trabalho dependente (Categoria A). No caso dos trabalhadores que têm algum tipo
-                                de vínculo laboral com o Estado e que sofreram já um corte salarial, o valor do Salário Bruto a
-                                considerar deverá ser o salário após corte salarial. 
+                                Este rendimento mensal diz respeito, apenas, a Trabalhadores Dependentes, onde o valor deverá ser o Salário Mensal Bruto,
+                                ou a titulares de Rendimentos de Pensões, onde o valor será o rendimento auferido mensalmente.
+                            </div>
+                            <br/>
+                            <div class="option-explanation">
+                                <b>Nota:</b> no caso dos trabalhadores que têm algum tipo de vínculo laboral com o Estado e que sofreram já um corte salarial, o valor
+                                do Salário Bruto a considerar deverá ser o salário após corte salarial. 
                             </div>
                         </td>
                     </tr>
                     
-                    <tr>
+                    <tr class="option-row">
                         <th>Situação</th>
                         <td>
-                            <select id="input-situacao" onchange="calcularRetencao()">
-                                <option value="1">Trabalhador Dependente, Não Casado</option>
-                                <option value="2">Trabalhador Dependente, Casado, Único Titular</option>
-                                <option value="3" selected="selected">Trabalhador Dependente, Casado, Dois Titulares</option>
-                                <option value="4">Trabalhador Dependente, Não Casado, Deficiente</option>
-                                <option value="5">Trabalhador Dependente, Casado, Único Titular, Deficiente</option>
-                                <option value="6">Trabalhador Dependente, Casado, Dois Titulares, Deficiente</option>
-                            </select>
-                            <div class="option-explanation">
-                                Seleccione o cenário que corresponde à sua situação.
-                            </div>
+                            <input id="radio-trab-dependente" type="radio" name="situacao" checked="checked" onclick="calcularSobretaxa()"/>
+                            <label for="radio-trab-dependente"><b>Trabalhador Dependente (Categoria A):</b></label>
+                            <br/>
+                            
+                            <table class="sub-options-table">
+                                <tbody>
+                                    <tr class="sub-options-row">
+                                        <th>Tipo de titular:</th>
+                                        <td>
+                                            <select id="input-trab-dependente-titular" onchange="calcularSobretaxa()">
+                                                <option value="1">Não Casado</option>
+                                                <option value="2">Casado, Único Titular</option>
+                                                <option value="3" selected="selected">Casado, Dois Titulares</option>
+                                                <option value="4">Não Casado, Deficiente</option>
+                                                <option value="5">Casado, Único Titular, Deficiente</option>
+                                                <option value="6">Casado, Dois Titulares, Deficiente</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr class="sub-options-row">
+                                        <th>Número de dependentes:</th>
+                                        <td>
+                                            <select id="input-trab-dependente-filhos" onchange="calcularSobretaxa()">
+                                                <option value="1">0</option>
+                                                <option value="2">1</option>
+                                                <option value="3">2</option>
+                                                <option value="4">3</option>
+                                                <option value="5">4</option>
+                                                <option value="6">5 ou mais</option>
+                                            </select>
+                                            filho(s)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+
+                            <br/>
+                            <br/>
+                            <input id="radio-pensionista" type="radio" name="situacao" onclick="calcularSobretaxa()"/>
+                            <label for="radio-pensionista"><b>Rendimentos de Pensões (Categoria H):</b></label>
+                            <br/>
+                            
+                            <table class="sub-options-table">
+                                <tbody>
+                                    <tr class="sub-options-row">
+                                        <th>Categoria:</th>
+                                        <td>
+                                            <select id="input-pensionista-categoria" onchange="calcularSobretaxa()">
+                                                <option value="1">Normal</option>
+                                                <option value="2">Deficiente</option>
+                                                <option value="3">Deficiente das Forças Armadas</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr class="sub-options-row">
+                                        <th>Titulares:</th>
+                                        <td>
+                                            <select id="input-pensionista-titulares" onchange="calcularSobretaxa()">
+                                                <option value="1">Não Casado</option>
+                                                <option value="2">Casado, Único Titular</option>
+                                                <option value="3">Casado, Dois Titulares</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </td>
                     </tr>
                     
-                    <tr>
-                        <th>Número de Dependentes</th>
-                        <td>
-                            <select id="input-nr-filhos" onchange="calcularRetencao()">
-                                <option value="1">0</option>
-                                <option value="2">1</option>
-                                <option value="3">2</option>
-                                <option value="4">3</option>
-                                <option value="5">4</option>
-                                <option value="6">5 ou mais</option>
-                            </select>
-                            <div class="option-explanation">
-                                Seleccione o número de dependentes (filhos) que tem a seu cargo.
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <tr>
+                    <tr class="option-row">
                         <th>Retenção na Fonte de IRS</th>
                         <td>
                             <input id="input-perc-retencao-na-fonte" name="input-perc-retencao-na-fonte" type="text" value="(não calculado)" disabled="disabled"/> <b>%</b>
                             <div class="option-explanation">
-                                Este valor é calculado automaticamente através das 3 variáveis anteriores: Salário Mensal Bruto,
-                                Situação e Número de Dependentes. A tabela usada para este cálculo está disponível
-                                <a href="http://info.portaldasfinancas.gov.pt/NR/rdonlyres/DB5B6AF4-0701-4DBC-941D-C2B0480DEB72/0/Tabelas_continente%202011.xls" target="_blank">neste link</a>.
+                                Este valor é calculado automaticamente, dependendo da situação escolhida anteriormente. As tabelas usadas para este cálculo estão disponíveis
+                                no Portal das Finanças, através <a href="http://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/tabela_ret_doclib/" target="_blank">deste link</a>.
+                            </div>
+                            <br/>
+                            <div class="option-explanation">
+                                <b>Nota:</b> atenção que a tabela usada é a de <i>Portugal Continental</i>. Existem pequenas diferenças para os <i>Açores</i> e
+                                <i>Madeira</i> que podem afectar, embora de forma muito ligeira, o resultado. A opção para a escolha da região será inserida brevemente.
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    
+                    <tr class="option-row">
                         <th>Taxa Social Única</th>
                         <td>
                             <input id="input-taxa-social-unica" name="input-taxa-social-unica" type="text" disabled="disabled" value="11"/> <b>%</b>
@@ -99,13 +147,14 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    
+                    <tr class="option-row">
                         <th>Salário Mínimo Nacional</th>
                         <td>
                             <input id="input-salario-minimo" name="input-salario-minimo" type="text" disabled="disabled" value="485"/> <b>€</b>
                         </td>
                     </tr>
-                    <tr class="calc-row">
+                    <tr class="option-row calc-row noborder">
                         <th/>
                         <td>
                             <span class="resultado-text">
@@ -119,31 +168,11 @@
                 </tbody>
             </table>
             
-            <h2>Apuramento da sobretaxa devido a final:</h2>
-            <hr/>
-            <table id="table-calc-sobretaxa-devido" class="options-table">
-                <tbody>
-                    <tr>
-                        <th>
-                        </th>
-                        <td>
-                            <div class="option-explanation">
-                                "Tal como o Público <a href="http://economia.publico.pt/Noticia/familias-com-baixos-rendimentos-vao-emprestar-ao-estado_1503254" target="_blank">destaca</a> deverá
-                                haver ajustamentos aquando da entrega da declaração anual de IRS já em 2012, podendo haver situação de devolução do imposto especial pago e outras
-                                em que este terá sido sub-estimado."
-                                <br/><br/>
-                                <i>O cálculo do pagamento/reembolso pode ser efectuado mas esta opção carece de um conhecimento mais aprofundado antes de ser implementada.</i>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
             <h2>Notas:</h2>
             <hr/>
             <table id="table-notas" class="options-table">
                 <tbody>
-                    <tr>
+                    <tr class="option-row">
                         <th>
                             Informações:
                         </th>
@@ -157,27 +186,23 @@
                                     </b>
                                 </li>
                                 <li>
-                                    A fórmula usada para o cálculo da sobretaxa é uma cópia fiel
-                                    da disponível <a href="http://economiafinancas.com/2011/07/formula-de-calculo-para-apuramento-do-imposto-especial-retencao-mensal/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+EconomiaFinancas+%28Economia+%26+Finan%C3%A7as%29" target="_blank">neste artigo</a>.
+                                    As fórmula usadas para o cálculo da sobretaxa são as disponibilizadas
+                                    <a href="http://www.jornaldenegocios.pt/archivos/2011_07/simulacoesdoimposto.pdf" target="_blank">aqui</a>.
                                 </li>
                                 <li>
-                                    Neste momento, e até prova em contrário, a dita fórmula apenas funciona para trabalhadores da Categoria A. Veja
-                                    <a href="http://www.jornaldenegocios.pt/archivos/2011_07/simulacoesdoimposto.pdf" target="_blank">aqui</a> algumas simulações para diferentes cenários.
-                                </li>
-                                <li>
-                                    Dependendo do tempo disponível, a minha vontade é alargar este cálculo a alguns cenários que, neste momento,
-                                    não são comtemplados por esta avaliação, nomeadamente aos pensionistas. Para isso, e para além do factor tempo,
-                                    serão também precisos alguns esclarecimentos nos cálculos já que o meu conhecimento nesta área é limitado.
+                                    Quem está a <b>recibos verdes</b> e presta serviços, paga o imposto em 2012, depois de entregar a declaração anual de
+                                    rendimentos. Este cálculo será implementado brevemente.
                                 </li>
                                 <li>
                                     Pode ver outros artigos relaccionados com o cálculo do imposto especial:
                                     <a href="http://economia.publico.pt/Noticia/familias-com-baixos-rendimentos-vao-emprestar-ao-estado_1503254" target="_blank">aqui</a>, 
-                                    <a href="http://economiafinancas.com/2011/06/qual-vai-ser-o-corte-no-meu-subsidio-de-natal-devido-ao-imposto-especial/" target="_blank">aqui</a>
+                                    <a href="http://economiafinancas.com/2011/06/qual-vai-ser-o-corte-no-meu-subsidio-de-natal-devido-ao-imposto-especial/" target="_blank">aqui</a>,
+                                    <a href="http://www.online24.pt/calculo-do-imposto-especial/" target="_blank">aqui</a>
                                 </li>
                             </ul>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="option-row">
                         <th>
                             Contactos:
                         </th>
