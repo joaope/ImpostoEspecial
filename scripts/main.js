@@ -1,7 +1,5 @@
 function calcularSobretaxa() {
     
-    console.log("DDDwdwddww");
-    
     var salario = parseFloat($('#input-salario').val());
     var taxa_unica = parseFloat($('#input-taxa-social-unica').val());
     var salario_minimo = parseFloat($('#input-salario-minimo').val());
@@ -10,8 +8,6 @@ function calcularSobretaxa() {
         resultadoImpostoEspecial('(erro no salario)');
         return;
     }
-    
-    console.log("DDDD");
     
     // TRABALHADOR DEPENDENTE
     if ($('#radio-trab-dependente:checked').val())
@@ -135,8 +131,6 @@ function resultadoImpostoEspecial(text) {
     else {
         result = text;
     }
-    
-    console.log(result);
     
     $('#resultado-sobretaxa').html(result);
 }
