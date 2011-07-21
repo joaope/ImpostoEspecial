@@ -32,6 +32,18 @@
             <hr/>
             <table id="table-calc-sobretaxa" class="options-table">
                 <tbody>
+                    
+                    <tr class="option-row">
+                        <th>Região</th>
+                        <td>
+                            <select id="input-regiao" onchange="calcularSobretaxa()">
+                                <option value="0" selected="selected">Continente</option>
+                                <option value="1">Região Autónoma dos Açores</option>
+                                <option value="2">Região Autónoma da Madeira</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
                     <tr class="option-row">
                         <th>Rendimento Mensal</th>
                         <td>
@@ -43,7 +55,7 @@
                             <br/>
                             <div class="option-explanation">
                                 <b>Nota:</b> no caso dos trabalhadores que têm algum tipo de vínculo laboral com o Estado e que sofreram já um corte salarial, o valor
-                                do Salário Bruto a considerar deverá ser o salário após corte salarial. 
+                                do Salário Bruto a considerar deverá ser o rendimento após corte salarial. 
                             </div>
                         </td>
                     </tr>
@@ -126,14 +138,10 @@
                         <td>
                             <input id="input-perc-retencao-na-fonte" name="input-perc-retencao-na-fonte" type="text" value="(não calculado)" disabled="disabled"/> <b>%</b>
                             <div class="option-explanation">
-                                Este valor é calculado automaticamente, dependendo da situação escolhida anteriormente. As tabelas usadas para este cálculo estão disponíveis
+                                Este valor é calculado automaticamente, dependendo das opções de região, rendimento mensal e situação escolhidas anteriormente. As tabelas usadas para este cálculo estão disponíveis
                                 no Portal das Finanças, através <a href="http://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/tabela_ret_doclib/" target="_blank">deste link</a>.
                             </div>
                             <br/>
-                            <div class="option-explanation">
-                                <b>Nota:</b> atenção que a tabela usada é a de <i>Portugal Continental</i>. Existem pequenas diferenças para os <i>Açores</i> e
-                                <i>Madeira</i> que podem afectar, embora de forma muito ligeira, o resultado. A opção para a escolha da região será inserida brevemente.
-                            </div>
                         </td>
                     </tr>
                     

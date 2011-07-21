@@ -3,6 +3,7 @@ function calcularSobretaxa() {
     var salario = parseFloat($('#input-salario').val());
     var taxa_unica = parseFloat($('#input-taxa-social-unica').val());
     var salario_minimo = parseFloat($('#input-salario-minimo').val());
+    var regiao = parseInt($('#input-regiao').val());
     
     if (isNaN(salario) || salario < 0) {
         resultadoImpostoEspecial('(erro no salario)');
@@ -44,6 +45,12 @@ function calcularSobretaxa() {
                 tabela_retencao = tabela_trab_dependente_casado_dois_titulares_deficiente;
                 break;
         }
+        
+        tabela_retencao = tabela_retencao[regiao];
+        
+        console.log(regiao);
+        
+        console.log(tabela_retencao.toString());
         
         for (var i = 0; i < tabela_retencao.length - 1; i++) {
             
@@ -95,6 +102,8 @@ function calcularSobretaxa() {
                 tabela_retencao = tabela_pensionista_deficiente_forcas_armadas;
                 break;
         }
+        
+        tabela_retencao = tabela_retencao[regiao];
         
         for (var i = 0; i < tabela_retencao.length - 1; i++) {
             
