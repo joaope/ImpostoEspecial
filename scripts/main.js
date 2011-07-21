@@ -48,10 +48,6 @@ function calcularSobretaxa() {
         
         tabela_retencao = tabela_retencao[regiao];
         
-        console.log(regiao);
-        
-        console.log(tabela_retencao.toString());
-        
         for (var i = 0; i < tabela_retencao.length - 1; i++) {
             
             if (salario <= tabela_retencao[i][0]) {
