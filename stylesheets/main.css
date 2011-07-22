@@ -152,6 +152,10 @@ h2 {
     margin: 0 15px 0 0;
 }
 
+.resultado-text a {
+    font-size: 18px;
+}
+
 .sub-options-table {
     width: auto;
     text-align: left;
@@ -178,4 +182,8 @@ h2 {
     font-size: 12px;
     width: auto;
     padding: 10px;
+}
+
+#detalhes-dialog p {
+    font-size: 12px;
 }

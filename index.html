@@ -8,10 +8,10 @@
             
         <link type="text/css" rel="stylesheet" href="stylesheets/reset.css"/>
         <link type="text/css" rel="stylesheet" href="stylesheets/main.css"/>
+        <link type="text/css" rel="stylesheet" href="stylesheets/jquery-ui-1.8.14.custom.css"/>
         
         <link rel="shortcut icon" href="/favicon.ico" />
 
-        
         <script type="text/javascript">
 
             var _gaq = _gaq || [];
@@ -98,6 +98,27 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <br/>
+                            <br/>
+                            
+                            <input id="radio-regime-simplificado" type="radio" name="situacao" onclick="calcularSobretaxa()"/>
+                            <label for="radio-regime-simplificado"><b>Trabalhador Independente (Categoria B - Regime Simplificado):</b></label>
+                            <br/>
+                            
+                            <table class="sub-options-table">
+                                <tbody>
+                                    <tr class="sub-options-row">
+                                        <th>Rendimento anual:</th>
+                                        <td>
+                                            <input id="input-regime-simpl-rend-anual" type="text" value="18000" onkeyup="calcularSobretaxa()"/> <b>€</b>
+                                            <div class="option-explanation">
+                                                Este valor deverá ser o total de rendimentos ao longo dos 12 meses do ano. O rendimento mensal não será
+                                                levado em conta para esta categoria.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             
 
                             <br/>
@@ -119,7 +140,7 @@
                                         </td>
                                     </tr>
                                     <tr class="sub-options-row">
-                                        <th>Titulares:</th>
+                                        <th>Tipo de titular:</th>
                                         <td>
                                             <select id="input-pensionista-titulares" onchange="calcularSobretaxa()">
                                                 <option value="1">Não Casado</option>
@@ -166,7 +187,7 @@
                         <th/>
                         <td>
                             <span class="resultado-text">
-                               Imposto Especial Retido:
+                               Imposto Especial Retido (<a id="detalhes-link" href="#">detalhes</a>):
                             </span>
                             <span id="resultado-sobretaxa" class="resultado">
                                0.00 €
@@ -227,8 +248,31 @@
 
         </div>
         
+        <div id="detalhes-dialog" title="Detalhes" style="vertical-align: top;">
+            <p>
+                Sendo trabalhador independente paga o imposto em 2012, depois de entregar a declaração anual de rendimentos.
+                
+            </p>
+            <br/>
+            <p>
+                Tal como é visível na fórmula representada em baixo serão descontados 14 salários mínimos ao rendimento
+                colectável anual e, do resultado, pagará 3.5% de sobretaxa.
+            </p>
+            <br/>
+            <p>
+                Com um rendimento anual de <b>18000€</b> o seu rendimento colectável de IRS será de <b>15000€</b> (<b>70%</b> do total).
+            </p>
+            <br/>
+            <p><b>Fórmula usada:</b></p>
+            <p>(RendimentoColectávelAnual - (14 x SalárioMínimo)) x 3.5%</p>
+            <br/>
+            <p><b>Fórmula final:</b></p>
+            <p>(15000 - (14 * 485€)) x 3.5% = <u>258</u>€</p>
+        </div>
+        
+        <script src="scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+        <script src="scripts/jquery-ui-1.8.14.custom.min.js" type="text/javascript"></script>
         <script src="scripts/tabelas.js" type="text/javascript"></script>
-        <script src="scripts/jquery-1.6.2.min.js" type="text/javascript"></script> 
         <script src="scripts/main.js" type="text/javascript"></script>
     </body>
 </html>
